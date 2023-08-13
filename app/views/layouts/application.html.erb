@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Proyecto</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel= "stylesheet" href= "https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"> 
+    <script defer src= "https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script> 
+  </head>
+
+  <body>
+      <nav class="navbar has-background-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <h4 class="title is-4"> &nbsp; Find your Hobby</h4> 
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="<%= courses_path %>">
+            <span class="icon-text">
+              <span class="icon">
+                <i class="fas fa-home"></i>
+              </span>
+              <span>Courses</span>
+            </span>
+          </a>
+          <% if current_user %>
+            <a class="navbar-item" href="<%= users_show_path(current_user.id)%>">
+              Porfile
+            </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+            <%# href="<%= lessons_index_path%> 
+              <%# <a class="user-details"> %>
+              <div class="navbar-item">
+                coming soon
+              </div>
+
+              <a class="navbar-item" href="<%= inscriptions_path %> ">
+                Mis suscripciones
+              </a> 
+
+              <a class="navbar-item" href="<%= new_course_path %>">
+                Upload a new course 
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                Report an issue
+              </a>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+            <% if current_user %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+            <% else %>
+              <a class="button is-danger" href="<%= new_user_registration_path %>">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light" href="<%= new_user_session_path %>">
+                Log in
+              </a>
+              </div> 
+            <% end %>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav> 
+
+
+    
+    <%= yield %>
+    <div align = 'center'> 
+      <p class="notice has-text-danger"><%= notice %></p>
+      <p class="alert has-text-danger"><%= alert %></p>
+    </div>
+
+
+  </body>
+</html>

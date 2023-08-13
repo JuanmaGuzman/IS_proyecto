@@ -1,0 +1,21 @@
+---
+development:
+  cloud_name: dcmpexxuu
+  api_key: '867349185745452'
+  api_secret: 7OmjYc4Ag1RdNiLXqQFy96oGrRU
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dcmpexxuu
+  api_key: '867349185745452'
+  api_secret: 7OmjYc4Ag1RdNiLXqQFy96oGrRU
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dcmpexxuu
+  api_key: '867349185745452'
+  api_secret: 7OmjYc4Ag1RdNiLXqQFy96oGrRU
+  enhance_image_tag: true
+  static_file_support: false
+
+  #Falta poner variables de entorno para mayor seguridad y despues agregarlas a heroku

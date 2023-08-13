@@ -1,0 +1,23 @@
+<br>
+<div align = 'center'> 
+    <h1 class="title is-1 has-text-danger">Lessons</h1>
+    <%= notice %>
+        <div class="columns is-centered">
+        <% @lesson.each do |lesson| %>
+            <div class="column has-background-light">
+                <br>
+                <h4 class="title is-4 has-text-danger"><%= lesson.name %></h4>
+                <p><%= link_to 'View details', lessons_show_path(:id => lesson.id) %></p>
+                <br>
+            </div>
+        <% end %>
+        </div>
+
+    <!-- ¿borrar lo que sigue? -->
+    <%# <br>
+    <br>
+    <% if current_user %>
+        <%# <%= link_to 'Upload a new lesson', lessons_new_path %>
+        <%# <%= link_to 'Courses', courses_path %> 
+    <%# <% end %>
+</div>

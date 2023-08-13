@@ -1,0 +1,48 @@
+<h1>New Forum</h1>
+
+<br>
+<div align="center">
+    <h1 class="title is-1">Ask</h1>
+        <div class="container">
+            <div class="box has-background-dark">
+                <%= form_with(model: @forum, method: :post) do |form| %>
+
+                <div class="title is-5 has-text-white">
+                    <%= form.label :Username %>
+                    <br>
+                    <%= form.text_field :user_name, id: :forum_user_id, value: current_user.name, type: :hidden %>
+                </div>
+
+                <div class="title is-5 has-text-white">
+                    <%= form.label :Content %>
+                    <br>
+                    <%= form.text_field :content %>
+                </div>
+
+                <div class="title is-5 has-text-white">
+                    <%= form.label :Date %>
+                    <br>
+                    <%= form.date_field :date %>
+                </div>
+
+                <div class="title is-5 has-text-white">
+                    <%= form.label :User_id %>
+                    <br>
+                    <%= form.number_field :user_id, id: :forum_user_id, value: current_user.id, type: :hidden %>
+                </div>
+
+                <div class="title is-5 has-text-white">
+                    <%= form.label :Lesson_id %>
+                    <br>
+                    <%= form.number_field :lesson_id, id: :forum_lesson_id, value: @lesson.id, type: :hidden %>
+                </div>
+
+                <div>
+                    <%= form.submit 'Create forum' %>
+                </div>
+
+            <% end %>
+            <%= link_to 'Go back', lessons_show_path(:id => @lesson.id) %>
+        </div>
+
+<%= link_to 'Back', forums_path %>

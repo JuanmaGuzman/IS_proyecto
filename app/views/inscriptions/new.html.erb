@@ -1,0 +1,16 @@
+<br>
+<div align = 'center'> 
+        <h1>New inscription</h1>
+        <div class="container">
+            <div class="box">
+                <div class="columns is-centered">
+
+                        <%= render partial: "inscriptions/form", locals: {course: @course} %> 
+
+                </div>
+            </div>
+        </div>
+
+    <%= link_to 'Go back', course_path(:id => @course.id) %>
+
+</div>

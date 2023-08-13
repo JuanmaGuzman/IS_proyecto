@@ -1,0 +1,29 @@
+<br>
+<div align="center">
+    <h1 class="title is-1">Upload a new lesson</h1>
+        <div class="container">
+            <div class="box has-background-dark">
+                <%= form_with(model: @lesson, method: :post) do |form| %>
+
+                <div class="title is-5 has-text-white">
+                    <%= form.label :Name %>
+                    <br>
+                    <%= form.text_field :name %>
+                </div>
+
+                <div class="field has-text-white">
+                    <%= form.label :video, "Lesson Video" %>
+                    <%= form.file_field :video, direct_upload: true %><br>
+                </div>
+
+                <div>
+                    <%= form.number_field :course_id, id: :lesson_course_id, value: @course.id, type: :hidden %>
+                </div>
+
+                <div>
+                    <%= form.submit 'Create lesson' %>
+                </div>
+
+            <% end %>
+            <%= link_to 'Go back', course_path(:id => @course.id) %>
+        </div>

@@ -1,0 +1,105 @@
+<div align = 'center'> 
+
+    <% if current_user %>
+        <% if current_user.email == "admin@findyourhobby.cl"%>
+            <h3 class="title is-3 has-text-danger">Admin account</h3>
+            <br>
+            <h4 class="title is-4">Edit courses:</h4>
+            <% @course.each do |courses| %>
+                <div class="box has-background-danger-light">
+                    <h5 class="title is-5"><%= courses.name %></h5>
+                    <div class="buttons is-centered">
+                        <a class="button is-dark is-outlined " href="<%= edit_course_path(:id => courses.id) %>">
+                            Edit Course
+                        </a>
+                        <a class="button is-dark is-outlined " href="<%= course_path(:id => courses.id) %>">
+                            View details
+                        </a>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+
+        <h3 class="title is-3 has-text-danger">Your created courses:</h3>
+        <br>
+        <div class="container">
+            <div class="box has-background-danger-light ">
+                <div class="columns is-centered">
+                    <% booleano1 = 0%>
+                    <% @course.each do |courses| %>
+                        <% if courses.user_id == current_user.id %>
+                            <% booleano1 = 1 %>
+                            <div class="column has-background-white is-one-quarter">
+                                <h5 class="title is-5"><%= courses.name %></h5>
+                                <div class="buttons is-centered">
+                                    <a class="button is-dark is-rounded" href="<%= edit_course_path(:id => courses.id) %>">
+                                        Edit Course
+                                    </a>
+                                    
+                                    <a class="button is-dark is-outlined is-rounded" href="<%= course_path(:id => courses.id) %>">
+                                        View details
+                                    </a>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <% if booleano1 == 0 %>
+                    <h2 class="column has-background-white is-one-quarter"> No tienes ningún curso creado </h2>
+                <% end %>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <h3 class="title is-3 has-text-danger">Others courses:</h3>
+        <br>
+        <div class="container">
+            <div class="box has-background-danger-light">
+                <div class="columns is-centered">
+                    <% if @course.empty? %>
+                        <h2 class="column has-background-white is-one-quarter">No hay cursos creados</h2>
+                    <% else %>
+                        <% @course.each do |course| %>
+                            <% if course.users != current_user %>
+                                <div class="column has-background-white is-one-quarter">
+                                    <h5 class="title is-5"><%= course.name %></h5>
+                                    <% @user.each do |user| %>
+                                        <% if user.id == course.user_id %>
+                                            <p>Profesor: <%= user.email %></p>
+                                            <% break %>
+                                        <%end%>
+                                    <% end %>
+                                    <a class="button is-dark is-outlined is-rounded" href="<%= course_path(:id => course.id) %>">
+                                        View details
+                                    </a>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+    <% else %>
+
+        <br>
+        <% unless current_user %>
+            <h3 class="title is-3 has-text-danger">¡All courses!</h3>
+            <br>
+            <div class="container">
+                <div class="box has-background-danger-light">
+                    <div class="columns is-centered">
+                        <% @course.each do |course| %>
+                            <div class="column has-background-white is-one-quarter">
+                            <h5 class="title is-5"><%= course.name %></h5>
+                            <a class="button is-dark is-outlined is-rounded" href="<%= new_user_registration_path %>">
+                                View details
+                            </a>
+                            </div>
+                        <% end %>
+                    </div> 
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+<br>
+<br>

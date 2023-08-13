@@ -1,0 +1,57 @@
+<div class="create-course-form-container">
+    <br>
+    <%= form_with(model: course, local: true) do |form| %>
+    <div class="title is-5 has-text-white">
+        <%= form.label :Name %>
+        <br>
+        <%= form.text_field :name %>
+    </div>
+    <div class="title is-5 has-text-white">
+        <%= form.label :Price %>
+        <br>
+        <%= form.number_field :price %>
+    </div>
+    <br>
+    <div>
+        <%= form.number_field :user_id, id: :courses_user_id, value: current_user.id, type: :hidden %>
+    </div>
+    
+    <p>
+      <%= form.submit 'Create course', class: 'button full-width'%>
+    </p>
+  <% end %>
+  <br>
+</div>
+<%# 
+<br>
+    <div class="container is-max-desktop">
+        <div class="box">
+            <h3 class="title is-3" align = center>Upload a new course</h3>
+            <%= form_with(model: @course, method: :post) do |form| %>
+
+                <%# <div class="field">
+                    <label class="label">
+                        <%= form.label :Name %>
+                    <%# </label>
+                    <div class="input" >
+                        <%= form.text_field :name %>
+                    <%# </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">
+                        <%= form.label :Price %>
+                    <%# </label>
+                    <div class="input" >
+                        <%= form.number_field :price %>
+                    <%# </div>
+                </div>
+
+                <div align="center">
+                    <button class="button is-danger" type="submit">Create course</button>
+                </div>
+
+            <% end %>
+        <%# </div> %>
+    <%# </div>
+    <br> %>

@@ -1,0 +1,33 @@
+<br>
+<div align="center">
+    <h1 class="title is-1">Edit your course</h1>
+
+        <div class="container">
+            <div class="box has-background-dark">
+                <div class="columns is-centered">
+                    <br>
+                    <%= form_with(model: @course, method: :patch, url: course_path(:id => @course.id)) do |form| %>
+                        <br>
+                        <div class="title is-5 has-text-white">
+                            <%= form.label :Name %>
+                            <%= form.text_field :name %>
+                        </div>
+                
+                        <div class="title is-5 has-text-white">
+                            <%= form.label :Price %>
+                            <%= form.number_field :price %>
+                        </div>
+
+                        <div class="actions">
+                            <button class="button is-danger is-rounded" type="submit">Submit</button>
+                        </div>
+                        <br>
+                
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+</div>
+
+

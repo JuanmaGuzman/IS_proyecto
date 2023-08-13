@@ -1,0 +1,43 @@
+<div align = 'center'> 
+    <br>
+    <br>
+    <h1 class="title is-1">
+        <%= @lesson.name %>
+    </h1>
+
+
+
+    <% if @lesson.video.attached? %>
+        <%= video_tag url_for(@lesson.video), controls: true %> 
+    <% end %>
+
+
+    <div>
+        <table align = 'center'>
+                <div align = 'center'> 
+                    <h3 class="title is-3">Forum</h3>
+                </div>
+            <tbody>
+                <% booleano5 = 0 %>
+                <% @forum.each do |forum| %>
+                    <tr>
+                    <% if @lesson.id == forum.lesson_id %>
+                        <% booleano5 = 1%>
+                        <td><%= forum.user_name %></td>
+                        <td><%= forum.content %></td> 
+                    <% end %>
+                    </tr>
+                <% end %>
+                <% if booleano5 == 0 %>
+                    <h2 class="column has-background-white is-one-quarter"> No hay preguntas en el foro </h2>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    
+
+    <%= link_to 'Go back', course_path(:id => @lesson.course_id) %>
+    <%= link_to 'Agregar comentario', new_forum_path(:id => @lesson.id) %>
+
+    
+</div>

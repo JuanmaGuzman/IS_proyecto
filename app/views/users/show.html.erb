@@ -1,0 +1,21 @@
+<br>
+<div align = 'center'> 
+    <figure class="image is-128x128">
+        <% if @user.porfile_image.attached? %>
+            <img class="is-rounded" src="<%=(url_for(@user.porfile_image))%>">
+        <%end%>
+    </figure>
+    <br>
+    <h3 class="title is-3"> <%= @user.name %></h3> 
+    <h1>
+    <span class="icon has-text-danger"><i class="fas fa-envelope"></i>&nbsp;<%= @user.email %>
+    </h1>
+    <br>
+    <a class="button is-danger" href="<%= edit_user_registration_path %>">
+        <strong>Edit porfile</strong>
+    </a>
+
+
+</div>
+
+

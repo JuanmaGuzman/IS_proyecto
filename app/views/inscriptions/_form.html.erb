@@ -1,0 +1,55 @@
+<div class="create-inscription-form-container">
+  <%= form_with(model: @inscription, locals: true) do |form| %>
+
+    <div>
+        <%#= @course.id %>
+        <%= form.number_field :course_id, id: :inscription_course_id, value: @course.id, type: :hidden %>
+    </div>
+
+    <div>
+        <%#= current_user.id %>
+        <%= form.number_field :user_id, id: :inscription_user_id, value: current_user.id, type: :hidden %>
+    </div>
+
+    <div>
+        <%= form.text_field :isprofesor, id: :inscription_isprofesor, value: false, type: :hidden %>
+    </div>
+
+    <p>
+      <%= form.submit 'Subscribe', class: 'button full-width'%>
+    </p>
+  <% end %>
+</div>
+<%# 
+<br>
+    <div class="container is-max-desktop">
+        <div class="box">
+            <h3 class="title is-3" align = center>Upload a new course</h3>
+            <%= form_with(model: @course, method: :post) do |form| %>
+
+                <%# <div class="field">
+                    <label class="label">
+                        <%= form.label :Name %>
+                    <%# </label>
+                    <div class="input" >
+                        <%= form.text_field :name %>
+                    <%# </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">
+                        <%= form.label :Price %>
+                    <%# </label>
+                    <div class="input" >
+                        <%= form.number_field :price %>
+                    <%# </div>
+                </div>
+
+                <div align="center">
+                    <button class="button is-danger" type="submit">Create course</button>
+                </div>
+
+            <% end %>
+        <%# </div> %>
+    <%# </div>
+    <br> %>

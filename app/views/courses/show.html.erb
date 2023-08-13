@@ -1,0 +1,164 @@
+<br>
+<div align = 'center'> 
+    <h1 class="title is-1 has-text-danger"><%= @course.name %></h1>
+    <p>
+        <strong>Price: </strong>
+        <%= @course.price %>
+    </p>
+    <p>
+
+        <strong>Teacher: </strong>
+        <% @user.each do |user| %> 
+            <% if user.id == @course.user_id %>
+                <%= user.name %> 
+                <br>
+                <span class="icon">
+                    <i class="fas fa-envelope-open-text"></i>
+                </span> 
+                <%= user.email %>
+                <% break %>
+            <%end%>
+        <%end%>
+    </p>
+
+    <br>                    
+
+    <table align = 'center'>
+            <div align = 'center'> 
+                <h3 class="title is-3">Participants</h3>
+            </div>
+        <tbody>
+            <% booleano3 = 0 %>
+            <% @user.each do |user| %> 
+                <% @inscription.each do |inscription| %> 
+                    <tr>
+                    <% if @course.id == inscription.course_id %>
+                        <% if user.id == inscription.user_id %>
+                            <% booleano3 = 1%>
+                            <td><%= user.name %></td> 
+                        <% end %>
+                    <% end %>
+                    </tr>
+                <% end %>
+            <% end %>
+            <% if booleano3 == 0 %>
+                <h2 class="column has-background-white is-one-quarter"> No hay participantes </h2>
+            <% end %>
+        </tbody>
+    </table>
+
+    <table align = 'center'>
+            <div align = 'center'> 
+                <h3 class="title is-3">Reviews</h3>
+            </div>
+        <tbody>
+            <% booleano4 = 0 %>
+            <% @review.each do |review| %>
+                <tr>
+                <% if @course.id == review.course_id %>
+                    <% booleano4 = 1%>
+                    <td><%= review.title %></td>
+                    <td><%= review.content %></td> 
+                <% end %>
+                </tr>
+            <% end %>
+            <% if booleano4 == 0 %>
+                <h2 class="column has-background-white is-one-quarter"> No hay reseñas </h2>
+            <% end %>
+        </tbody>
+    </table>
+    
+    <div align = 'center'> 
+        <h3 class="title is-3">Lessons</h3>
+    </div>
+    <div class="container">
+        <div class="box">
+            <div class="columns is-centered">
+                <% booleano2 = 0 %>
+                <% booleano5 = 0 %>
+                <% @lesson.each do |lesson| %> 
+                    <% if @course.id == lesson.course_id %>
+                        <% booleano2 = 1%>
+                        <div class="column has-background-danger-light">
+                            <p class="title is-5"><%= lesson.name %></p> 
+                            <br>
+                            <% if current_user.email == "admin@findyourhobby.cl"%>
+                                <td><%= link_to 'Edit', lessons_edit_path(:id => lesson.id) %></td>
+                                <td><%= link_to 'Open', lessons_show_path(:id => lesson.id) %></td>                             
+
+                            <% elsif @course.user_id == current_user.id %>
+                                <td><%= link_to 'Edit', lessons_edit_path(:id => lesson.id) %></td> 
+                                <td><%= link_to 'Open', lessons_show_path(:id => lesson.id) %></td> 
+                            
+                            <% else %>
+                                <% @inscription.each do |inscription| %>
+                                    <% if inscription.user_id == current_user.id %>
+                                        <% booleano5 = 1 %>
+                                    <% end %>
+                                <% end %>
+                                <% if booleano5 == 1 %>
+                                    <td><%= link_to 'Open', lessons_show_path(:id => lesson.id) %></td>
+                                <% else %>
+                                    <td><%= link_to 'Suscribir al curso', new_inscription_path(:id => @course.id) %></td>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                <% end %>
+                <% if booleano2 == 0 %>
+                    <h2 class="column has-background-white is-one-quarter"> No hay lessons creadas </h2>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+    <% if @course.user_id == current_user.id %>
+        
+        <div align="center">
+            <div class="buttons has-addons is-centered">
+
+                <a class="button is-dark is-outlined" href="<%= edit_course_path(:id => @course.id) %>">
+                    Edit Course
+                </a>
+                <a class="button is-dark is-outlined" href="<%= lessons_new_path(:id => @course.id) %>">
+                    Add Lesson
+                </a>
+            </div>
+        </div>  
+
+        <br>
+        <%= link_to 'Delete Course', course_path(:id => @course.id), method: :delete %>
+    <% else %>
+        <% if current_user %>
+            <% @inscription.each do |inscription| %>
+                <% if inscription.user_id == current_user.id %>
+                    <% if @course.id == inscription.course_id %>
+                        <div>
+                            <%= link_to 'Unsuscribe', inscription_path(:id => @inscription.ids), method: :delete %>
+                        </div>
+                        <a class="button is-dark is-outlined" href="<%= new_review_path(:id => @course.id) %>">
+                            Add review
+                        </a>
+                    <% else %> 
+                        <a class="button is-danger is-outlined" href="<%= new_inscription_path(:id => @course.id) %>">
+                            Subscribe
+                        </a>
+                    <% end %>
+                <% end %>
+            <% end %>
+            <% if @inscription.empty? %>
+                <a class="button is-danger is-outlined" href="<%= new_inscription_path(:id => @course.id) %>">
+                    Subscribe
+                </a>
+            <% end %>
+        <% else %> 
+            <a class="button is-danger is-outlined" href="<%= new_user_registration_path %>">
+                Subscribe
+            </a>
+        <% end %>
+    <% end %>
+</div> 
+
+

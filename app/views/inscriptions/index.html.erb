@@ -1,0 +1,26 @@
+<br>
+<div align = 'center'> 
+        <% if current_user %>
+        <h3 class="title is-3 has-text-danger">Your subscriptions:</h3>
+        <br>
+        <div class="container">
+            <div class="box">
+                <div class="columns is-centered">
+                    <% @inscription.each do |inscription| %>
+                        <% if inscription.user_id == current_user.id %>
+                            <% @course.each do |courses| %>
+                                <% if courses.id == inscription.course_id %>
+                                    <div class="column has-background-danger-light">
+                                        <h4 class="title is-4"><%= courses.name %> </h4>
+                                        <p><%= link_to 'View details', course_path(:id => courses.id) %></p>
+                                    </div>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+<br>
+<br>

@@ -1,0 +1,16 @@
+<br>
+<div align="center">
+    <h1 class="title is-1">New course</h1>
+
+        <div class="container">
+            <div class="box has-background-dark">
+                <div class="columns is-centered">
+                    <br>
+                    <%= form_with(model: @course, method: :post) do |form| %>
+                        <%= render partial: "courses/form", locals: {course: @course} %>
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,38 @@
+<br>
+<div align = 'center'> 
+    <br>
+    <h1 class="title is-1">Edit your lesson</h1>
+    <div class="container">
+        <div class="box has-background-dark">
+            <%= form_with(model: @lesson, method: :patch, url: lessons_update_path(:id => @lesson.id)) do |form| %>
+                <br>
+                <div class="title is-5 has-text-white">
+                    <%= form.label :Name %>
+                    <%= form.text_field :name %>
+                </div>
+
+                <div class="field has-text-white">
+                    <%= form.label :video, "Lesson Video" %>
+                    <%= form.file_field :video, direct_upload: true %><br>
+                </div>
+                
+                <div>
+                    <%= form.number_field :course_id, id: :lesson_course_id, value: @lesson.course_id, type: :hidden %>
+                </div>
+
+                <div>
+                    <div class="actions">
+                        <button class="button is-danger is-rounded" type="submit">Edit lesson</button>
+                    </div>
+                </div>
+
+            <% end %>
+            
+            <% if current_user %>
+                <%= link_to 'Delete lesson', lessons_delete_path(:id => @lesson.id), method: :delete %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+
